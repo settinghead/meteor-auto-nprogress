@@ -15,7 +15,7 @@ if(Meteor.isClient){
 
     Meteor.withoutBar = function(){
       return {
-        subscribe: Meteor.subscribe
+        subscribe: Meteor._originalSubscribe
       };
     };
     
