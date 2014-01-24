@@ -1,9 +1,4 @@
 if(Meteor.isClient){
-  Meteor.withNprogress = function(){
-    // return {
-    //   subscribe: function()
-    // }
-  }
   Meteor.startup(function(){
     Meteor._originalSubscribe = Meteor.subscribe;
     Meteor.subscribe = function(){
@@ -17,5 +12,12 @@ if(Meteor.isClient){
       },80);
       return handle;      
     };
+
+    Meteor.withoutBar = function(){
+      return {
+        subscribe: Meteor.subscribe
+      };
+    };
+    
   });
 }
