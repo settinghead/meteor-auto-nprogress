@@ -1,7 +1,10 @@
-#meteor-auto-nprogress
+#meteor-auto-nprogress [![Build Status](https://travis-ci.org/settinghead/meteor-auto-nprogress.png?branch=master)](https://travis-ci.org/settinghead/meteor-auto-nprogress)
 --------------------------
 
 A Meteorite package that automatically shows a [NProgress.js](http://ricostacruz.com/nprogress/) bar during DDP data exchange.
+
+##Compatibility
+Tested on Meteor 0.7.1. May work for Meteor 0.6.x, but this has yet to be confirmed.
 
 ##Usage
 
