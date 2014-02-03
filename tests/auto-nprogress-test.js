@@ -48,4 +48,17 @@ if(Meteor.isClient) {
       test.isTrue(NProgress.isStarted());
     }
   ]);
+
+  testAsyncMulti("Auto NProgress - Disabling NProgress bar", [
+    function(test, expect) {
+
+      Meteor.withoutBar.subscribe('superLargeFakeErroneousCollection', {
+        onError: expect(function(){
+          test.isFalse(NProgress.isStarted());
+        })
+      });
+
+      test.isFalse(NProgress.isStarted());
+    }
+  ]);
 }
