@@ -13,12 +13,12 @@ if(Meteor.isServer) {
     return fut.wait();
   });
 
-  Meteor.publish("superLargeFakeCollection", function(){
+  Meteor.publish("superLargeFakeErroneousCollection", function(){
     var _this = this;
     var fut = new Future();
 
     setTimeout(function () {
-      fut['return'](_this.error("some erroneous shit has happened"));
+      fut['return'](_this.error("some erroneous shit has transpired"));
     }, 1000);
 
     return fut.wait();
