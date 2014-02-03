@@ -1,4 +1,4 @@
-#meteor-auto-nprogress [![Build Status](https://travis-ci.org/settinghead/meteor-auto-nprogress.png?branch=master)](https://travis-ci.org/settinghead/meteor-auto-nprogress)
+#meteor-auto-nprogress [![Build Status](https://travis-ci.org/settinghead/meteor-auto-nprogress.png?branch=master)](https://travis-ci.org/settinghead/meteor-auto-nprogress) [![Code Climate](https://codeclimate.com/github/settinghead/meteor-auto-nprogress.png)](https://codeclimate.com/github/settinghead/meteor-auto-nprogress)
 --------------------------
 
 A Meteorite package that automatically shows a [NProgress.js](http://ricostacruz.com/nprogress/) bar during DDP data exchange.
