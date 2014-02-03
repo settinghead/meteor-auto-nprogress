@@ -36,7 +36,7 @@ if(Meteor.isClient){
           }
 
           if(lastObj.onError && isFunction(lastObj.onError)) {
-            callbacks.onError = makeFn(lastObj.onReady);
+            callbacks.onError = makeFn(lastObj.onError);
             newArgs = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
           }
         }
