@@ -3,7 +3,7 @@
   "description": "A Meteorite package that automatically shows a NProgress.js bar during DDP data exchanges.",
   "homepage": "https://github.com/settinghead/meteor-auto-nprogress.git",
   "author": "Xiyang Chen (https://github.com/settinghead)",
-  "version": "0.2",
+  "version": "0.2.0",
   "git": "https://github.com/settinghead/meteor-auto-nprogress.git",
   "packages": {
     "nprogress": {}
