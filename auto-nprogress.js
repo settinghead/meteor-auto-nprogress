@@ -5,6 +5,10 @@ if(Meteor.isClient){
    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
   }
 
+  Meteor.startup(function(){
+
+  });
+
   Meteor._originalSubscribe = Meteor.subscribe;
 
   Meteor.subscribe = function(){
@@ -17,7 +21,9 @@ if(Meteor.isClient){
 
     function makeFn(fn){
       return function(){
-        NProgress.done();
+        if(document.body) {
+          NProgress.done();
+        }
         fn.apply(_this, arguments);
       };
     }
@@ -45,7 +51,9 @@ if(Meteor.isClient){
       newArgs.push(callbacks);
     }
 
-    NProgress.start();
+    if(document.body){
+      NProgress.start();
+    }
     var handle = Meteor._originalSubscribe.apply(_this, newArgs);
     return handle;      
   };
