@@ -10,17 +10,20 @@ if(Meteor.isClient){
   Meteor.subscribe = function(){
 
     //preserves original onReady and onError functions
-    var callbacks = {};
     var newArgs = arguments;
+    var callbacks = {};
 
     var _this = this;
 
     function makeFn(fn){
       return function(){
+        console.log('done');
         if(document.body) {
           NProgress.done();
         }
-        fn.apply(_this, arguments);
+        if(fn){
+          fn.apply(_this, arguments);          
+        }
       };
     }
 
@@ -44,13 +47,24 @@ if(Meteor.isClient){
         }
       }
     };
-
-    if(callbacks.onReady || callbacks.onError){
-      newArgs.push(callbacks);
+ 
+    if(!callbacks.onReady){
+      callbacks.onReady = makeFn();
+    }
+    if(!callbacks.onError){
+      callbacks.onError = makeFn();
     }
 
+    Array.prototype.push.call(newArgs, callbacks);
+
+    console.log(newArgs);
     if(document.body){
       NProgress.start();
+      setTimeout(function(){
+        if(document.body) {
+          NProgress.done();
+        }
+      }, 20000);
     }
     var handle = Meteor._originalSubscribe.apply(_this, newArgs);
     return handle;      
