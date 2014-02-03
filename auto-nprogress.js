@@ -6,59 +6,57 @@ if(Meteor.isClient){
   }
 
   Meteor.startup(function(){
+    Meteor._originalSubscribe = Meteor.subscribe;
 
-  });
+    Meteor.subscribe = function(){
 
-  Meteor._originalSubscribe = Meteor.subscribe;
+      //preserves original onReady and onError functions
+      var callbacks = {};
+      var newArgs = arguments;
 
-  Meteor.subscribe = function(){
+      var _this = this;
 
-    //preserves original onReady and onError functions
-    var callbacks = {};
-    var newArgs = arguments;
+      function makeFn(fn){
+        return function(){
+          if(document.body) {
+            NProgress.done();
+          }
+          fn.apply(_this, arguments);
+        };
+      }
 
-    var _this = this;
-
-    function makeFn(fn){
-      return function(){
-        if(document.body) {
-          NProgress.done();
+      if(arguments.length > 1) {
+        var lastObj = arguments[arguments.length - 1];
+        if(isFunction(lastObj)){
+          callbacks.onReady = makeFn(lastObj);
+          newArgs = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
         }
-        fn.apply(_this, arguments);
+        else{
+          if(lastObj.onReady && isFunction(lastObj.onReady)) {
+            callbacks.onReady = makeFn(lastObj.onReady);
+            newArgs = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
+          }
+
+          if(lastObj.onError && isFunction(lastObj.onError)) {
+            callbacks.onError = makeFn(lastObj.onError);
+            newArgs = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
+          }
+        }
       };
-    }
 
-    if(arguments.length > 1) {
-      var lastObj = arguments[arguments.length - 1];
-      if(isFunction(lastObj)){
-        callbacks.onReady = makeFn(lastObj);
-        newArgs = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
+      if(callbacks.onReady || callbacks.onError){
+        newArgs.push(callbacks);
       }
-      else{
-        if(lastObj.onReady && isFunction(lastObj.onReady)) {
-          callbacks.onReady = makeFn(lastObj.onReady);
-          newArgs = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
-        }
 
-        if(lastObj.onError && isFunction(lastObj.onError)) {
-          callbacks.onError = makeFn(lastObj.onError);
-          newArgs = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
-        }
+      if(document.body){
+        NProgress.start();
       }
+      var handle = Meteor._originalSubscribe.apply(_this, newArgs);
+      return handle;      
     };
 
-    if(callbacks.onReady || callbacks.onError){
-      newArgs.push(callbacks);
-    }
-
-    if(document.body){
-      NProgress.start();
-    }
-    var handle = Meteor._originalSubscribe.apply(_this, newArgs);
-    return handle;      
-  };
-
-  Meteor.withoutBar =  {
-    subscribe: Meteor._originalSubscribe
-  };
+    Meteor.withoutBar =  {
+      subscribe: Meteor._originalSubscribe
+    };
+  });
 }
