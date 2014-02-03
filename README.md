@@ -3,6 +3,8 @@
 
 A Meteorite package that automatically shows a [NProgress.js](http://ricostacruz.com/nprogress/) bar during DDP data exchange.
 
+(In plain words, it automatically adds a slick-looking, unintrusive progress bar and a spinner at the top of your web app for any loading activities in your Meteor app.)
+
 ##Compatibility
 Tested on Meteor 0.7.1. May work for Meteor 0.6.x, but this has yet to be confirmed.
 
