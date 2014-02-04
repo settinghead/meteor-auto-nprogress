@@ -3,7 +3,12 @@ if(Meteor.isClient){
   var isFunction = function (functionToCheck) {
    var getType = {};
    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
-  }
+  };
+
+  var isMeteorSubscription = function (name){
+    return (name.indexOf("meteor.")===0 
+        || name.indexOf("meteor_")===0);
+  };
 
   Meteor.startup(function(){
 
@@ -11,10 +16,7 @@ if(Meteor.isClient){
 
     Meteor.subscribe = function(subscribeName){
 
-      if(subscribeName 
-        && subscribeName.indexOf("meteor.")!==0 
-        && subscribeName.indexOf("meteor_")!==0) {
-
+      if(subscribeName && !isMeteorSubscription(subscribeName)) {
 
         //preserves original onReady and onError functions
         var newArgs = arguments;
