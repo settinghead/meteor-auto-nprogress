@@ -17,7 +17,6 @@ if(Meteor.isClient){
 
     function makeFn(fn){
       return function(){
-        console.log('done');
         if(document.body) {
           NProgress.done();
         }
@@ -57,7 +56,6 @@ if(Meteor.isClient){
 
     Array.prototype.push.call(newArgs, callbacks);
 
-    console.log(newArgs);
     if(document.body){
       NProgress.start();
       setTimeout(function(){
