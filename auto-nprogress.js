@@ -1,13 +1,13 @@
 if(Meteor.isClient){
-  
+
   var isFunction = function (functionToCheck) {
    var getType = {};
    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
   };
 
   var isMeteorSubscription = function (name){
-    return (name.indexOf("meteor.")===0 
-        || name.indexOf("meteor_")===0);
+    return (name.indexOf("meteor.")===0 ||
+        name.indexOf("meteor_")===0);
   };
 
   Meteor.startup(function(){
@@ -26,20 +26,20 @@ if(Meteor.isClient){
 
         var params = Array.prototype.slice.call(arguments, 1);
 
-        function makeFn(fn){
+        var makeFn = function (fn) {
           return function(){
             if(document.body) {
               NProgress.done();
             }
             if(fn){
-              fn.apply(_this, arguments);          
+              fn.apply(_this, arguments);
             }
           };
-        }
+        };
 
-        function cut(args){
+        var cut = function (args){
           return Array.prototype.slice.call(args, 0, args.length - 1);
-        }
+        };
 
         if(arguments.length > 1) {
           var lastObj = arguments[arguments.length - 1];
@@ -60,8 +60,8 @@ if(Meteor.isClient){
               }
             }
           }
-        };
-     
+        }
+
         if(!callbacks.onReady){
           callbacks.onReady = makeFn();
         }
@@ -81,7 +81,7 @@ if(Meteor.isClient){
           }, 80);
         }
         var handle = Meteor._originalSubscribe.apply(_this, newArgs);
-        return handle;      
+        return handle;
       }
     };
 
