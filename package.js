@@ -1,7 +1,7 @@
 Package.describe({
   "name": "settinghead:auto-nprogress",
   "summary": "A Meteor package that automatically shows a NProgress.js bar during DDP data exchanges.",
-  "version": "0.2.9",
+  "version": "1.0.0",
   "git": "https://github.com/settinghead/meteor-auto-nprogress.git"
 });
 

@@ -6,7 +6,7 @@ A Meteor package that automatically shows a [NProgress.js](http://ricostacruz.co
 (In plain words, it automatically adds a slick-looking, unintrusive progress bar and a spinner at the top of your web app for any loading activities in your Meteor app.)
 
 ##Compatibility
-Tested on Meteor 0.9.0.
+Tested on Meteor 1.0.0.
 
 ##Usage
 
