@@ -1,3 +1,5 @@
+##[WARNING] This package is not under active development.
+
 #meteor-auto-nprogress [![Build Status](https://travis-ci.org/settinghead/meteor-auto-nprogress.png?branch=master)](https://travis-ci.org/settinghead/meteor-auto-nprogress) [![Code Climate](https://codeclimate.com/github/settinghead/meteor-auto-nprogress.png)](https://codeclimate.com/github/settinghead/meteor-auto-nprogress)
 --------------------------
 
